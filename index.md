@@ -107,13 +107,13 @@ We'll tackle the issue of limiting it's reach first. A simple way to do this is 
 
 <img src="./images/alpha.png" width="500"/>
 
-Now that we've succesfully limited the reach of the smoke, let's quickly make the background more visible, partly because smoke will stand out more on a black background, partly because we've done this set-up before, and without this little addition things are hard to see...
+Now that we've successfully limited the reach of the smoke, let's quickly make the background more visible, partly because smoke will stand out more on a black background, partly because we've done this set-up before, and without this little addition things are hard to see...
 
 Add a Blend patch between your newly added Multiply patch and the STDP (your super-powered patch) like so :
 
 <img src="./images/backgroundChanged.png" width="500"/>
 
-This also adresses an issue we've kept silent about that you may have noticed : you haven't been able to change the background color for a while... This blend patch will mainly allow us to do just that!
+This also addresses an issue we've kept silent about that you may have noticed : you haven't been able to change the background color for a while... This blend patch will mainly allow us to do just that!
 
 Now that we have the background color set, we need to attack the actual smoke's color, which ideally we want to be white. The trick here is rethinking what we initially feed into the loop. As you can see in the preview, we currently have the segmentation in use, however showing the cameraTexture through. We'd want the same, but filled in with a flat color. You guessed it (or not), that's exactly what the personSegmentationMaskTexture0's Alpha channel is, a white person segmentation mask. So we'll feed that in!
 
@@ -139,7 +139,7 @@ Remember how we decided from the start this was going to be applied to our user,
 1. what we want to use to drive the distortion
 2. what we want rendered in the front
 
-The first point is rather straightforward, as we want to be generating the smoke based on the 3d object and not the segmentation, we simply have to feed our 3D object as the base image delayed in our loop. In order to do this, and because of our use of the Render Pass feature, we're going need to make use of a Scene Render Pass patch. Simply dragging the object in the scene isn't enough for it to be visible, we need to tell SparkAR to render it.
+The first point is rather straightforward, as we want to be generating the smoke based on the 3d object and not the segmentation, we simply have to feed our 3D object as the base image delayed in our loop. In order to do this, and because of our use of the Render Pass feature, we're going to make use of a Scene Render Pass patch. Simply dragging the object in the scene isn't enough for it to be visible, we need to tell SparkAR to render it.
 
 <img src="./images/smokeObject.png" width="500"/>
 
