@@ -158,3 +158,13 @@ And that's how you apply it to a scene object! A final touch here would be to ma
 _The effect can be applied to an emitter using the exact same technique_
 
 <img src="./images/emitterSmoke.png" width="500"/>
+
+### Conclusion
+
+Now that you have the Super Texture Distortion Shader <sup>tm</sup> and you know how to make smoke with it, here are a few things to experiment with: 
+
+- Animated noise to make the smoke more fluid!
+- Animation sequences, like fire!
+- Try making a glass effect with the distortion patch!
+- Multiply the smoke emitter by an animated color value!
+- Smoke + distortion for some heat waves!
