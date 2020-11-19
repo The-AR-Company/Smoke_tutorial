@@ -4,7 +4,7 @@
 
 This tutorial was made as an entry for the [2020 Developer Circles Community Challenge](https://developercircles2020.devpost.com/) hosted by Facebook.
 
-We'll be showing you how to achieve a smokey shader effect to be applied on any scene item thanks to Spark AR's [Render Pass](https://sparkar.facebook.com/ar-studio/learn/patch-editor/render-passes/render-passes-overview#limitation) feature as well as a slightly modified patch from the Spark AR library.
+We'll be showing you how to achieve a smokey shader effect to be applied on any scene object, thanks to Spark AR's [Render Pass](https://sparkar.facebook.com/ar-studio/learn/patch-editor/render-passes/render-passes-overview#limitation) feature as well as a slightly modified patch from the Spark AR library.
 
 _This is what we're building:_
 
@@ -91,7 +91,7 @@ The distortion texture gets sampled and swizzled into a vector2, but because thi
 
 <img src="./images/rotationEffect.gif" width="500"/>
 
-Now you can expose that value as a parameter called “direction”! Your new Super Texture Distortion Shader <sup>tm</sup> should look like this: 
+Now you can expose that value as a parameter called “direction”! Your new `Super Texture Distortion Shader` <sup>tm</sup> should look like this: 
 
 <img src="./images/superDistortion.png" width="300"/>
 
@@ -103,13 +103,13 @@ To set the records straight, this is what you should be seeing in your preview i
 
 We now have a nice flowy movement that goes upwards. This however is not smoke, as it not only isn't the right color, but it's flowing to infinity and beyond, reaching all the way to the borders of the screen.
 
-We'll tackle the issue of limiting it's reach first. A simple way to do this is to place a Multiply patch in between the delay frame Receiver and our newly-built Super Texture Distortion Shader <sup>tm</sup>. Given that the receiver is transmitting a texture, we can easily affect it's opacity by setting the multiplier to anything below 1.
+We'll tackle the issue of limiting it's reach first. A simple way to do this is to place a Multiply patch in between the delay frame Receiver and our newly-built `Super Texture Distortion Shader` <sup>tm</sup>. Given that the receiver is transmitting a texture, we can easily affect it's opacity by setting the multiplier to anything below 1.
 
 <img src="./images/alpha.png" width="500"/>
 
 Now that we've successfully limited the reach of the smoke, let's quickly make the background more visible, partly because smoke will stand out more on a black background, partly because we've done this setup before (and without this little addition things are hard to see).
 
-Add a `Blend` patch between your newly added `Multiply` patch and the Super Texture Distortion Shader <sup>tm</sup> like so:
+Add a `Blend` patch between your newly added `Multiply` patch and the `Super Texture Distortion Shader` <sup>tm</sup> like so:
 
 <img src="./images/backgroundChanged.png" width="500"/>
 
@@ -117,7 +117,7 @@ This also addresses an issue we've kept silent about that you may have noticed: 
 
 Now that we have the background color set, we need to attack the actual smoke's color, which ideally we want to be white. The trick here is rethinking what we initially feed into the loop. As you can see in the preview, we currently have the segmentation in use, however showing the cameraTexture through. We'd want the same, but filled in with a flat color. You guessed it (or not), that's exactly what the personSegmentationMaskTexture0's Alpha channel is, a white person segmentation mask. So we'll feed that in!
 
-Concretely, bring the `Blend` patch connected to the `Device Output` upwards and add another one underneath. This new patch will take the Alpha output from the personSegmentationMaskTexture patch as a source, and, since we want it in the loop, will take your Super Texture Distortion Shader <sup>tm</sup> as destination input. This way, the alpha channel is thrown into the delay frame, distorted, cycled back, etc.
+Concretely, bring the `Blend` patch connected to the `Device Output` upwards and add another one underneath. This new patch will take the Alpha output from the personSegmentationMaskTexture patch as a source, and, since we want it in the loop, will take your `Super Texture Distortion Shader` <sup>tm</sup> as destination input. This way, the alpha channel is thrown into the delay frame, distorted, cycled back, etc.
 
 <img src="./images/newBlend.png" width="500"/>
 
@@ -151,7 +151,7 @@ Now that we do see our 3D object, the smoke has disappeared; a bit of a conundru
 
 <img src="./images/transparencyMagic.gif" width="500"/>
 
-And that's how you apply it to a scene object! A final touch here would be to make the background visible, as a black background really isn't very useful. You can do this a plethora of ways but what we'll be doing involves adding a blend patch right after the Super Texture Distortion Shader <sup>tm</sup> in order to blend the results of the loop with the cameraTexture (if you try to feed the cameraTexture within the loop it'll get distorted as well). You can either put a new one or, as shown below, move the one between your `Multiply` and Super Texture Distortion Shader <sup>tm</sup> patch and put it just after in the chain.
+And that's how you apply it to a scene object! A final touch here would be to make the background visible, as a black background really isn't very useful. You can do this a plethora of ways but what we'll be doing involves adding a blend patch right after the `Super Texture Distortion Shader` <sup>tm</sup> in order to blend the results of the loop with the cameraTexture (if you try to feed the cameraTexture within the loop it'll get distorted as well). You can either put a new one or, as shown below, move the one between your `Multiply` and `Super Texture Distortion Shader` <sup>tm</sup> patch and put it just after in the chain.
 
 <img src="./images/finalSmoke.png" width="500"/>
 
@@ -161,7 +161,7 @@ _The effect can be applied to an emitter using the exact same technique_
 
 ### Conclusion
 
-Now that you have the Super Texture Distortion Shader <sup>tm</sup> and you know how to make smoke with it, here are a few things to experiment with: 
+Now that you have the `Super Texture Distortion Shader` <sup>tm</sup> and you know how to make smoke with it, here are a few things to experiment with: 
 
 - Animated noise to make the smoke more fluid!
 - Animation sequences, like fire!
