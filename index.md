@@ -170,6 +170,10 @@ Now that you have the Super Texture Distortion Shader <sup>tm</sup> and you know
 - Smoke + distortion for some heat waves!
 
 <style>
+  body {
+    line-height: 1.8;
+    font-size: 16px;
+  }
   code {
     margin: 0;
     padding: 0;
