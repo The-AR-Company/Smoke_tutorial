@@ -168,3 +168,12 @@ Now that you have the Super Texture Distortion Shader <sup>tm</sup> and you know
 - Try making a glass effect with the distortion patch!
 - Multiply the smoke emitter by an animated color value!
 - Smoke + distortion for some heat waves!
+
+<style>
+  code {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-weight: bold;
+  }
+</style>
