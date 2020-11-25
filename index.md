@@ -169,6 +169,10 @@ Now that you have the `Super Texture Distortion Shader` <sup>tm</sup> and you kn
 - Multiply the smoke emitter by an animated color value!
 - Smoke + distortion for some heat waves!
 
+### Inspiration
+
+<video src="./videos/finofinissimo_vanish.mp4" muted autoplay loop></video>
+
 <style>
   body {
     line-height: 1.8;
