@@ -75,14 +75,19 @@ To get started using distortion, we're going to need two things:
 1. [a noise texture](./downloads/noise.jpg)
 2. the `Texture Distortion Shader` from the spark AR library
 
-A sample noise texture, and the one we'll be using in this example, can be found in the downloads section on this project's github page. Download it and drag it into your assets panel. Next, go into the Spark AR library and search for the Texture Distortion Shader. Once found, Import it into your project and drag it into your patch editor, using it to connect the delay frame Receiver and the Blend patch, foregoing their initial direct connection.
+A sample noise texture, and the one we'll be using in this example, can be found in the downloads section on this project's [github page](https://github.com/The-AR-Company/Smoke_tutorial). Download it and drag it into your assets panel. Next, go into the Spark AR library and search for the `Texture Distortion Shader`. Once found, import it into your project and drag it into your patch editor, using it to connect the delay frame `Receiver` and the `Blend` patch, foregoing their initial direct connection. This will add the distortion step in the loop, being applied from the first cycle onwards.
 
 <img src="./images/importDistortion.gif" width="500"/>
 <img src="./images/connectDistort.png" width="500"/>
 
-This patch uses a grayscale texture to distort another texture. It can be useful as-is, but there are a few adjustments that can be made to make it more flexible. We’ll expose one value to control the strength of the distortion (it’s already there, just not exposed), and another to control the direction (by default, the distortion moves diagonally from the top left to bottom right). 
+This patch uses a grayscale texture to distort another texture. The way it goes about this is going through each pixel comprising both images and using the colors, ranging from white to black, of the grayscale image's pixels to determine how much it will displace the pixels of the original image. This becomes quite obvious visually speaking once put into action, as seen in the screenshots below. We can identify that the `Texture Distortion Shader`has deformed our delayed frame following a similar pattern to that of the noise.jpg texture we're feeding it.
 
-Click the “expand” or master link button to enter the patch group. You’ll see a find the multiply patch toward the beginning of the graph and click on the input. It will show a button that allows you to expose that input as a parameter on the parent group.
+<img src="./images/noiseEffect.png" width="150"/>
+<img src="./images/noise.jpg" width="100"/>
+
+It can be useful as-is, but there are a few adjustments that can be made to make it more flexible. We’ll expose one value to control the strength of the distortion (it’s already there, just not exposed), and another to control the direction (by default, the distortion moves diagonally from the top left to bottom right). 
+
+Click the “expand” or master link button to enter the patch group. You’ll see a `Multiply` patch toward the beginning of the graph, click on its input. It will show a button that allows you to expose that input as a parameter on the parent group.
 
 <img src="./images/expandPatch.gif" width="500"/>
 
@@ -90,15 +95,16 @@ This will be the strength parameter. You can name it appropriately, and set some
 
 <img src="./images/editProperties.png" width="300"/><img src="./images/strengthParam.png" width="300"/>
 
-This strength value is affecting the brightness of the distortion texture, so anything less than 1 will be darkening and anything greater than 1 will be brightening. The pixel brightness of the distortion texture is used to determine how far to move the pixels in the main texture. 
+This strength value as you may have guessed is directly affecting the brightness of the distortion texture, aka the noise.jpg grayscale image, via multiplication. Affecting the brightness of this texture will naturally impact the individual color of each of it's pixels, in turn affecting the displacemenf of each pixel in the original texture. Anything less than 1 will darken the image, leading to smaller displacements, whereas anything higher than 1 will brighten the image, strenghtening of the effect.
 
 _The pictures below use the final version of the effect so it's easier to understand_
 
 <img src="./images/strengthEffect.png" width="500"/>
 
-The distortion texture gets sampled and swizzled into a vector2, but because this is a grayscale image, the x and y values are both the same, meaning the distortion will always be in a diagonal direction (e.g. one pixel right, one pixel down). We can easily change the direction of the vector by multiplying it by another vector2. 
+The distortion texture gets sampled and swizzled into a vector2, but because this is a grayscale image, the x and y values are both the same, meaning the distortion will always be in a diagonal direction (e.g. one pixel right, one pixel down). We can easily change the direction of the vector by multiplying it by another vector2. In order to do this, add a `Multiply`patch in between the `Swizzle`output and the `Add`patch it's connected to.
 
 <img src="./images/rotationEffect.gif" width="500"/>
+<img src="./images/multiplyAdd.png" width="500"/>
 
 Now you can expose that value as a parameter called “direction”! Your new `Super Texture Distortion Shader` <sup>tm</sup> should look like this: 
 
