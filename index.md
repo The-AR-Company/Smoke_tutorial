@@ -50,19 +50,28 @@ We could just feed the `Delay Frame` in it using the `Receiver` patch we set up 
 
 <img src="./images/Blend.png" width="500"/>
 
-At this point we can connect the output of our `Blend` to the `Device` output and finally see some preliminary results, as it's drawing with the transparency. We can change the background color by touching the color in the delay frame. It's also here that we see our initial loop, that starts from our cameraTexture based setup and goes into the texture transform. From there, it enters the cycle, gets modified, sent to the delay frame; which in turn is fed back into our blend, and sent through the cycle ad infinitum.
+At this point we can connect the output of our `Blend` to the `Device` output and finally see some preliminary results, as it's drawing with the transparency. 
+
+<img src="./images/firstVisual.gif" width="150"/>
+
+We can change the background color by modifying the one in the `Delay Frame`. 
+
+Also noteworthy is that we see our initial loop fully fleshed out :
+- it starts with the cameraTexture and personSegmentation mix entering the `Blend`patch
+- this output then gets transformed before being fed into the `Delay Frame`
+- it cycles from the `Delay Frame`to the `Receiver`, bringing it back inside the `Blend`to repeat the loop ad infinitum
 
 <img src="./images/First%20Loop.png" width="600"/>
 
-Modifying the values within the `2d Transform Pack` will directly impact the effect. For example affecting the scale even by just 0,01 will make the frames scale off in a direction. For our purposes, we want the transformations to be centered, so we'll also set Pivots to 0,5 (they are relative to the screen). You can play around with this to get wild results, from changing the values to using the facetracker position as a driving force, have fun!
+Modifying the values within the `2d Transform Pack` will directly impact the effect. For example changing the scale even by just 0,01 will make each delayed frame scale increasingly on each loop. For our purposes, we want the transformations to be centered, so we'll also set Pivots to 0,5 (they are relative to the screen). You can play around with this to get wild results, from randomizing the values to using the facetracker position as a driving force, have fun!
 
 <img src="./images/Values.png" width="400"/>
 
-This is fundamentally what makes the smoke effect, from here we're going to use a technique called distortion, so every frame gets distorted a little bit more based on the previous distortion.
+This is fundamentally what makes the smoke effect, from here we're going to use a technique called distortion, so every frame gets "distorted" -aka transformed- a little bit more with each pass into the loop, similarly to the scaling effect just above.
 
 ### Part 3 - _Texture Distortion Shader_
 
-To get started on the distortion, we're going to need two things:
+To get started using distortion, we're going to need two things:
 1. [a noise texture](./downloads/noise.jpg)
 2. the `Texture Distortion Shader` from the spark AR library
 
