@@ -1,16 +1,15 @@
-## _How to create a smoke effect with render passes in Spark AR_
+## _How to create a smoke effect with render passes in Spark AR Studio_
 
 This tutorial was made as an entry for the [2020 Developer Circles Community Challenge](https://developercircles2020.devpost.com/) hosted by Facebook.
 
-We'll be showing you how to achieve a smokey shader effect to be applied on any scene object, thanks to Spark AR's [Render Pass](https://sparkar.facebook.com/ar-studio/learn/patch-editor/render-passes/render-passes-overview#limitation) feature as well as a slightly modified patch from the Spark AR library.
+We'll be showing you how to achieve a smokey shader effect to be applied on any scene object, thanks to Spark AR Studio's [Render Pass](https://sparkar.facebook.com/ar-studio/learn/patch-editor/render-passes/render-passes-overview#limitation) feature as well as a slightly modified patch from the Spark AR Studio AR Library.
 
 <img src="./images/demo.gif" width="300"/>
-
 
 ### Before you start
 
 This is everything you will need to get started:
-1. A running version of Spark AR v90+ ([Download Spark AR](https://sparkar.facebook.com/ar-studio/download/))
+1. A running version of Spark AR Studio v90+ ([Download Spark AR Studio](https://sparkar.facebook.com/ar-studio/download/))
 2. Any noise texture (one is provided [here](./downloads/noise.jpg))
 
 That's it!
@@ -19,7 +18,7 @@ That's it!
 
 The idea behind this project is creating a feedback loop effect with the Render Pass feature that we'll use to apply distortion on multiple passes. We'll be using `Delay Frame`s and modifying them on each successive run through said loop. Each iteration will affect the frame, giving it a continuous effect.
 
-The first thing we'll want to do is start from a blank template on Spark AR. From here, we'll set up a few patches and briefly go over why them specifically.
+The first thing we'll want to do is start from a blank template on Spark AR Studio. From here, we'll set up a few patches and briefly go over why them specifically.
 We'll then proceed to bring in the device output patch only (not the default render pass pipeline) to begin using the `Render Pass` feature :
 
 <img src="./images/Device%20output.gif" width="250"/>
@@ -73,9 +72,9 @@ This is fundamentally what makes the smoke effect, from here we're going to use 
 
 To get started using distortion, we're going to need two things:
 1. [a noise texture](./downloads/noise.jpg)
-2. the `Texture Distortion Shader` from the spark AR library
+2. the `Texture Distortion Shader` from the Spark AR Studio AR Library
 
-A sample noise texture, and the one we'll be using in this example, can be found in the downloads section on this project's [github page](https://github.com/The-AR-Company/Smoke_tutorial). Download it and drag it into your assets panel. Next, go into the Spark AR library and search for the `Texture Distortion Shader`. Once found, import it into your project and drag it into your patch editor, using it to connect the delay frame `Receiver` and the `Blend` patch, foregoing their initial direct connection. This will add the distortion step in the loop, being applied from the first cycle onwards.
+A sample noise texture, and the one we'll be using in this example, can be found in the downloads section on this project's [github page](https://github.com/The-AR-Company/Smoke_tutorial). Download it and drag it into your assets panel. Next, go into the Spark AR Studio AR Library and search for the `Texture Distortion Shader`. Once found, import it into your project and drag it into your patch editor, using it to connect the delay frame `Receiver` and the `Blend` patch, foregoing their initial direct connection. This will add the distortion step in the loop, being applied from the first cycle onwards.
 
 <img src="./images/importDistortion.gif" width="500"/>
 <img src="./images/connectDistort.png" width="500"/>
@@ -146,7 +145,7 @@ This leads us to the final project setup, featuring a nice smokin' Dolapo. The e
 
 ### Part 5 - _Applying it to a 3D scene object_
 
-The most common use case we'd imagine people wanting from this setup is applying it to a 3D scene object. Doing so requires importing any 3D object in your scene. For this example we'll just import a primitive shape from the Spark AR library (similarly to how we imported the initial `Texture Distortion` patch) and drag it in the scene.
+The most common use case we'd imagine people wanting from this setup is applying it to a 3D scene object. Doing so requires importing any 3D object in your scene. For this example we'll just import a primitive shape from the Spark AR Studio AR Library (similarly to how we imported the initial `Texture Distortion` patch) and drag it in the scene.
 
 <img src="./images/sparkPrimitive.png" width="500"/>
 
@@ -156,7 +155,7 @@ Remember how we decided from the start this was going to be applied to our user,
 1. What we want to use to drive the distortion.
 2. What we want rendered in the front.
 
-The first point is rather straightforward, as we want to be generating the smoke based on the 3d object and not the segmentation. We simply have to feed our 3D object as the base image in our infinite loop. In order to do this, and because of our use of the Render Pass feature, we're going to make use of a `Scene Render Pass` patch. Simply dragging the object in the scene isn't enough for it to be visible, we need to tell Spark AR to render it.
+The first point is rather straightforward, as we want to be generating the smoke based on the 3d object and not the segmentation. We simply have to feed our 3D object as the base image in our infinite loop. In order to do this, and because of our use of the Render Pass feature, we're going to make use of a `Scene Render Pass` patch. Simply dragging the object in the scene isn't enough for it to be visible, we need to tell Spark AR Studio to render it.
 
 <img src="./images/smokeObject.png" width="500"/>
 
