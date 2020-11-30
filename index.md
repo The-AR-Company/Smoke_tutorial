@@ -19,7 +19,7 @@ That's it!
 The idea behind this project is creating a feedback loop effect with the Render Pass feature that we'll use to apply distortion on multiple passes. We'll be using `Delay Frame`s and modifying them on each successive run through said loop. Each iteration will affect the frame, giving it a continuous effect.
 
 The first thing we'll want to do is start from a blank template on Spark AR Studio. From here, we'll set up a few patches and briefly go over why them specifically.
-We'll then proceed to bring in the device output patch only (not the default render pass pipeline) to begin using the `Render Pass` feature :
+We'll then proceed to bring in the device output patch only (not the default render pass pipeline) to begin using the Render Pass feature :
 
 <img src="./images/Device%20output.gif" width="250"/>
 
